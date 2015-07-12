@@ -51,9 +51,14 @@ public class Register extends HttpServlet {
 		String user_Name = new String (request.getParameter("newName").getBytes("ISO-8859-1"),"utf-8");
 		String pwd = new String (request.getParameter("newPwd").getBytes("ISO-8859-1"),"utf-8");
 		String sql = "insert into tb_user(user_id,user_name,password) values ('"+user_ID+"','"+user_Name+"','"+pwd+"')";
-		co.update(sql);
-		response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"注册成功!  请牢记密码!\");" + " window.location.href=\"./JSP/HEAD/login.jsp\";</script> ");
-		//response.sendRedirect("./JSP/HEAD/login.jsp");
+		try
+		{
+			co.update(sql);
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"注册成功!  请牢记密码!\");" + " window.location.href=\"./JSP/HEAD/login.jsp\";</script> ");
+		} catch (Exception e)
+		{
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"注册失败!  此工号已存在！\");" + " window.location.href=\"./JSP/HEAD/register.jsp\";</script> ");
+		}//response.sendRedirect("./JSP/HEAD/login.jsp");
 		out.flush();
 		out.close();
 	}

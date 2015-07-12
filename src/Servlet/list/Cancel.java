@@ -1,24 +1,25 @@
-package Servlet.index;
+package Servlet.list;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
 
-import JavaBean.DBBean;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class Login extends HttpServlet {
+import JavaBean.DBBean;
+
+public class Cancel extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor of the object.
 	 */
-	public Login() {
+	public Cancel() {
 		super();
 	}
 
@@ -47,36 +48,24 @@ public class Login extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		
-		DBBean co = new DBBean();
-		String user_ID = new String (request.getParameter("userID").getBytes("ISO-8859-1"),"utf-8");
-		String pwd = new String (request.getParameter("userPwd").getBytes("ISO-8859-1"),"utf-8");
-		String sql = "select user_id,user_name from tb_user where user_id='"+user_ID+"' and password='"+pwd+"'";
+		DBBean DB=new DBBean();
 		
+		String userid=request.getParameter("userid").toString();
+		String room=request.getParameter("room").toString();
+		String date=request.getParameter("date").toString();
+		int ordertime=Integer.parseInt(request.getParameter("ordertime"));
+		String reason=new String (request.getParameter("reason").getBytes("ISO-8859-1"),"utf-8");
 		
-		HttpSession session = request.getSession();
-		
-		if (co.isLogined()){
-			response.sendRedirect("./index.jsp");
-		}else{
-			ResultSet rs = co.query(sql);
-			try {
-				if (rs.next()){
-					String uName = rs.getString(2);
-					co.setLogined(true);
-					session.setAttribute("userName", uName);
-					session.setAttribute("userID", user_ID);
-					session.setAttribute("isLogined", "true");
-					response.sendRedirect("./index.jsp");
-				}else{
-					co.setLogined(false);
-					session.setAttribute("isLogined", "false");				
-					response.sendRedirect("./JSP/HEAD/login.jsp?password=false");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}					
-		}
+		//更改订单的状态
+		String sql="update tb_order set state=0 and back_reason='"+reason+"' where " +
+				"user_id='"+userid+"' and b_id='"+room+"' and " +
+				"order_date='"+date+"' and order_time="+ordertime;
+			try{
+				DB.update(sql);
+				response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"取消成功! \");" + " window.location.href=\"../../CMS/JSP/LIST/listroom.jsp \";</script> ");
+			} catch (Exception e){
+				response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"取消失败，请重试！\");" + " window.location.href=\"../../CMS/JSP/LIST/listroom.jsp \";</script> ");
+			}
 		out.flush();
 		out.close();
 	}
@@ -93,7 +82,7 @@ public class Login extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request,response);
+		doGet(request, response);
 	}
 
 	/**
@@ -104,4 +93,5 @@ public class Login extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
+
 }

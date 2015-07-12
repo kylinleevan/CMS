@@ -9,17 +9,20 @@
 			href="http://localhost:8080/CMS/bootstrap/css/bootstrap.min.css">
 		<script src="http://localhost:8080/CMS/bootstrap/js/jquery.min.js"></script>
 		<script src="http://localhost:8080/CMS/bootstrap/js/bootstrap.js"></script>
-		<style>body {padding-top: 50px;}</style>
+		<style>body {	padding-top: 50px;}
+</style>
 	</head>
 	<body>
 		<%
 			String s = (String) session.getAttribute("isLogined");
+			String userName = (String) session.getAttribute("userName");
+			String userID = (String) session.getAttribute("userID");
 			String t = "true";
 			if (!t.equals(s))
 				response
 						.sendRedirect("http://localhost:8080/CMS/JSP/HEAD/login.jsp");
 		%>
-		<nav class="navbar navbar-default navbar-fixed-top"
+		<nav class="navbar navbar-inverse navbar-fixed-top"
 			style="height: 50px">
 		<div class="container-fluid">
 			<div class="row">
@@ -45,16 +48,14 @@
 							<li>
 								<a href="http://localhost:8080/CMS/JSP/LIST/listroom.jsp"><p
 										class="text-success">
-										个人信息
-									</p>
-								</a>
+										欢迎你，<%= userName %>
+									</p> </a>
 							</li>
 							<li>
 								<a href="http://localhost:8080/CMS/Logout"><p
 										class="text-danger">
 										退出系统
-									</p>
-								</a>
+									</p> </a>
 							</li>
 						</ul>
 					</div>

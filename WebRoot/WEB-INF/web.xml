@@ -40,6 +40,104 @@
     <servlet-name>Tb_article</servlet-name>
     <servlet-class>Servlet.table.Tb_article</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_article_awards</servlet-name>
+    <servlet-class>Servlet.table.Tb_article_awards</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_train</servlet-name>
+    <servlet-class>Servlet.table.Tb_train</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_re_poj</servlet-name>
+    <servlet-class>Servlet.table.Tb_re_poj</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_support</servlet-name>
+    <servlet-class>Servlet.table.Tb_support</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_group_build</servlet-name>
+    <servlet-class>Servlet.table.Tb_group_build</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_book</servlet-name>
+    <servlet-class>Servlet.table.Tb_book</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_ipr</servlet-name>
+    <servlet-class>Servlet.table.Tb_ipr</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_checkup</servlet-name>
+    <servlet-class>Servlet.table.Tb_checkup</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_meeting</servlet-name>
+    <servlet-class>Servlet.table.Tb_meeting</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Tb_foreign</servlet-name>
+    <servlet-class>Servlet.table.Tb_foreign</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Boardroombytime</servlet-name>
+    <servlet-class>Servlet.room.Boardroombytime</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UpdateInfo</servlet-name>
+    <servlet-class>Servlet.list.UpdateInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteInfo</servlet-name>
+    <servlet-class>Servlet.list.DeleteInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Cancel</servlet-name>
+    <servlet-class>Servlet.list.Cancel</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,6 +167,62 @@
   <servlet-mapping>
     <servlet-name>Tb_article</servlet-name>
     <url-pattern>/Tb_article</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_article_awards</servlet-name>
+    <url-pattern>/Tb_article_awards</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_train</servlet-name>
+    <url-pattern>/Tb_train</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_re_poj</servlet-name>
+    <url-pattern>/Tb_re_poj</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_support</servlet-name>
+    <url-pattern>/Tb_support</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_group_build</servlet-name>
+    <url-pattern>/Tb_group_build</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_book</servlet-name>
+    <url-pattern>/Tb_book</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_ipr</servlet-name>
+    <url-pattern>/Tb_ipr</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_checkup</servlet-name>
+    <url-pattern>/Tb_checkup</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_meeting</servlet-name>
+    <url-pattern>/Tb_meeting</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Tb_foreign</servlet-name>
+    <url-pattern>/Tb_foreign</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Boardroombytime</servlet-name>
+    <url-pattern>/Boardroombytime</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateInfo</servlet-name>
+    <url-pattern>/UpdateInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteInfo</servlet-name>
+    <url-pattern>/DeleteInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Cancel</servlet-name>
+    <url-pattern>/Cancel</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

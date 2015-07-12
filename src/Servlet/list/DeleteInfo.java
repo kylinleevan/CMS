@@ -1,24 +1,21 @@
-package Servlet.index;
+package Servlet.list;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
 
-import JavaBean.DBBean;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class Logout extends HttpServlet {
+import JavaBean.DBBean;
+
+public class DeleteInfo extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public Logout() {
+	public DeleteInfo() {
 		super();
 	}
 
@@ -46,12 +43,69 @@ public class Logout extends HttpServlet {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
+		//接收数据表的键参数及表的标识
+		int key=Integer.parseInt(request.getParameter("key"));
+		int flag=Integer.parseInt(request.getParameter("flag"));
+		//sql语句
+		String sql0="delete from info_re_poj where ="+key;
+		String sql1="delete from info_train where ="+key;
+		String sql2="delete from info_article where ="+key;
+		String sql3="delete from info_support where ="+key;
+		String sql4="delete from info_groupBuild where ="+key;
+		String sql5="delete from info_book where ="+key;
+		String sql6="delete from info_ipr where ="+key;
+		String sql7="delete from info_checkup where ="+key;
+		String sql8="delete from info_meeting where ="+key;
+		String sql9="delete from info_foreign where ="+key;
+		DBBean DB=new DBBean();
+		//执行删除
+		try{
+			switch (flag) {
+			case 0:
+				DB.update(sql0);
+				break;
+			case 1:
+				DB.update(sql1);
+				break;
+			case 2:
+				DB.update(sql2);
+				break;
+			case 3:
+				DB.update(sql3);
+				break;
+			case 4:
+				DB.update(sql4);
+				break;
+			case 5:
+				DB.update(sql5);
+				break;
+			case 6:
+				DB.update(sql6);
+				break;
+			case 7:
+				DB.update(sql7);
+				break;
+			case 8:
+				DB.update(sql8);
+				break;
+			case 9:
+				DB.update(sql9);
+				break;
+			default:
+				break;
+			}
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"成功删除记录! \");" + " window.location.href=\"../../CMS/JSP/LIST/listroom.jsp \";</script> ");
+		} catch (Exception e){
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"删除失败，请重试！\");" + " window.location.href=\"../../CMS/JSP/LIST/listroom.jsp \";</script> ");
+		}
 		
-		HttpSession session = request.getSession();
-		session.removeAttribute("isLogined");
-		session.removeAttribute("userName");
-		session.removeAttribute("userID");
-		response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"已退出登录!\");" + " window.location.href=\"./JSP/HEAD/login.jsp\";</script> ");
+		
+
+		
+		
+		
+		
+		
 		
 		out.flush();
 		out.close();
@@ -69,7 +123,7 @@ public class Logout extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request,response);
+		doGet(request, response);
 	}
 
 	/**

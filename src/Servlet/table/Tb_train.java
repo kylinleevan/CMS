@@ -1,24 +1,19 @@
-package Servlet.index;
+package Servlet.table;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
 
-import JavaBean.DBBean;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class Login extends HttpServlet {
+public class Tb_train extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public Login() {
+	public Tb_train() {
 		super();
 	}
 
@@ -44,39 +39,17 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		
-		DBBean co = new DBBean();
-		String user_ID = new String (request.getParameter("userID").getBytes("ISO-8859-1"),"utf-8");
-		String pwd = new String (request.getParameter("userPwd").getBytes("ISO-8859-1"),"utf-8");
-		String sql = "select user_id,user_name from tb_user where user_id='"+user_ID+"' and password='"+pwd+"'";
-		
-		
-		HttpSession session = request.getSession();
-		
-		if (co.isLogined()){
-			response.sendRedirect("./index.jsp");
-		}else{
-			ResultSet rs = co.query(sql);
-			try {
-				if (rs.next()){
-					String uName = rs.getString(2);
-					co.setLogined(true);
-					session.setAttribute("userName", uName);
-					session.setAttribute("userID", user_ID);
-					session.setAttribute("isLogined", "true");
-					response.sendRedirect("./index.jsp");
-				}else{
-					co.setLogined(false);
-					session.setAttribute("isLogined", "false");				
-					response.sendRedirect("./JSP/HEAD/login.jsp?password=false");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}					
-		}
+		out
+				.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
+		out.println("<HTML>");
+		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
+		out.println("  <BODY>");
+		out.print("    This is ");
+		out.print(this.getClass());
+		out.println(", using the GET method");
+		out.println("  </BODY>");
+		out.println("</HTML>");
 		out.flush();
 		out.close();
 	}
@@ -93,7 +66,21 @@ public class Login extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request,response);
+
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out
+				.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
+		out.println("<HTML>");
+		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
+		out.println("  <BODY>");
+		out.print("    This is ");
+		out.print(this.getClass());
+		out.println(", using the POST method");
+		out.println("  </BODY>");
+		out.println("</HTML>");
+		out.flush();
+		out.close();
 	}
 
 	/**
@@ -104,4 +91,5 @@ public class Login extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
+
 }

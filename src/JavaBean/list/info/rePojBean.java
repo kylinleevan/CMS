@@ -11,7 +11,7 @@ import JavaBean.DBBean;
  *
  */
 public class rePojBean {
-	private int []rId;                   
+	private int []rId;                //键序号                 
 	private String []rName;           //项目名称
 	private String []rSerial;         //项目编号
 	private String []rSource;         //项目来源
@@ -19,9 +19,15 @@ public class rePojBean {
 	private String []endTime;         //项目结束时间
 	private String []person;          //承担人
 	private double []fee;             //经费（万元）
+	private String []publisher;       //上传人
+	private String []publishTime;     //上传时间
+	/**********************************************************/
 	private int rePojNumber;          //结果集数目编号
 	private DBBean DB=new DBBean();   //连接数据库
 	private ResultSet rs;             //查询结果集
+	private String sql;
+	/**********************************************************/
+	/**********************************************************/
 	public int getrId(int i) {
 		return rId[i];
 	}
@@ -71,26 +77,45 @@ public class rePojBean {
 		this.fee[i] = fee;
 	}
 
+	public String getPublisher(int i) {
+		return publisher[i];
+	}
+	public void setPublisher(String publisher,int i) {
+		this.publisher[i] = publisher;
+	}
+	public String getPublishTime(int i) {
+		return publishTime[i];
+	}
+	public void setPublishTime(String publishTime,int i) {
+		this.publishTime[i] = publishTime;
+	}
+	/*****************************************************************/
 	public int getrePojNumber() {
 		return rePojNumber;
 	}
 	public void setrePojNumber(int rePojNumber) {
 		this.rePojNumber = rePojNumber;
 	}
+	
+	/*****************************************************************/
+	/****************************************************************/
+	/**
+	 * 
+	 */
 	public  rePojBean(){}
 	/**
 	 * 初始化
 	 * @param user
 	 */
 	public boolean init(String user){
-
-		String sql="select * from info_re_poj where publisher='"+user+"'";
+		sql="select * from info_re_poj where publisher='"+user+"'";
+		
 		rs=DB.query(sql);
 		try {
 			while(rs.next()){
 				rePojNumber++;
 			}
-			rs.first();        //光标指向第一行
+	//		rs.first();        //光标指向第一行
 			//初始化JavaBean数组
 			if(rePojNumber!=0){
 				rId=new int[rePojNumber];
@@ -101,6 +126,8 @@ public class rePojBean {
 				endTime=new String[rePojNumber];
 				person=new String[rePojNumber];
 				fee=new double[rePojNumber];
+				publisher=new String[rePojNumber];
+				publishTime=new String[rePojNumber];
 			}
 			else{
 				return false;
@@ -118,10 +145,11 @@ public class rePojBean {
 	public void query(String user,boolean sign){
 		if(sign){
 			try {
+				rs=DB.query(sql);
 				int i=0;
-				do{
+				while(rs.next()){
 					//保存各个属性
-					setrId(i+1, i);
+					setrId(rs.getInt("r_id"), i);
 					setrName(rs.getString("r_name"), i);                         //保存项目名称
 					setrSerial(rs.getString("r_serial"), i);                     //保存项目编号
 					setrSource(rs.getString("r_source"), i);                     //保存项目来源
@@ -129,8 +157,10 @@ public class rePojBean {
 					setEndTime(rs.getString("end_time"), i);                     //保存项目结束时间
 					setPerson(rs.getString("person"), i);                        //保存责任人 
 					setFee(rs.getDouble("fee"), i);                              //保存项目经费
+					setPublisher(rs.getString("publisher"), i);
+					setPublishTime(rs.getString("pub_date"), i);
 					i++;
-				}while(rs.next());
+				}
 
 			} catch (SQLException e) {
 				e.printStackTrace();

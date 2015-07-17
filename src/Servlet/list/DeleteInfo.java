@@ -47,66 +47,41 @@ public class DeleteInfo extends HttpServlet {
 		int key=Integer.parseInt(request.getParameter("key"));
 		int flag=Integer.parseInt(request.getParameter("flag"));
 		//sql语句
-		String sql0="delete from info_re_poj where ="+key;
-		String sql1="delete from info_train where ="+key;
-		String sql2="delete from info_article where ="+key;
-		String sql3="delete from info_support where ="+key;
-		String sql4="delete from info_groupBuild where ="+key;
-		String sql5="delete from info_book where ="+key;
-		String sql6="delete from info_ipr where ="+key;
-		String sql7="delete from info_checkup where ="+key;
-		String sql8="delete from info_meeting where ="+key;
-		String sql9="delete from info_foreign where ="+key;
+		String sql;
 		DBBean DB=new DBBean();
 		//执行删除
 		try{
+			//判断执行删除哪一个表格中的记录
 			switch (flag) {
 			case 0:
-				DB.update(sql0);
-				break;
+				sql="delete from info_re_poj where r_id="+key;break;
 			case 1:
-				DB.update(sql1);
-				break;
+				sql="delete from info_train where year="+key;break;
 			case 2:
-				DB.update(sql2);
-				break;
+				sql="delete from info_article where a_id="+key;break;
 			case 3:
-				DB.update(sql3);
-				break;
+				sql="delete from info_support where s_id="+key;break;
 			case 4:
-				DB.update(sql4);
-				break;
+				sql="delete from info_groupBuild where g_id="+key;break;
 			case 5:
-				DB.update(sql5);
-				break;
+				sql="delete from info_book where b_id="+key;break;
 			case 6:
-				DB.update(sql6);
-				break;
+				sql="delete from info_ipr where ipr_id="+key;break;
 			case 7:
-				DB.update(sql7);
-				break;
+				sql="delete from info_checkup where c_id="+key;break;
 			case 8:
-				DB.update(sql8);
-				break;
+				sql="delete from info_meeting where m_id="+key;break;
 			case 9:
-				DB.update(sql9);
-				break;
-			default:
-				break;
+				sql="delete from info_foreign where f_id="+key;break;
+			default:sql="";break;
 			}
-			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"成功删除记录! \");" + " window.location.href=\"../../CMS/JSP/LIST/listroom.jsp \";</script> ");
+			int rs=DB.update(sql);
+			if(rs!=0){
+				response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"成功删除"+rs+"条记录! \");" + " window.location.href=\"../../CMS/JSP/LIST/listinfo.jsp \";</script> ");
+			}
 		} catch (Exception e){
-			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"删除失败，请重试！\");" + " window.location.href=\"../../CMS/JSP/LIST/listroom.jsp \";</script> ");
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"删除失败，请重试！\");" + " window.location.href=\"../../CMS/JSP/LIST/listinfo.jsp \";</script> ");
 		}
-		
-		
-
-		
-		
-		
-		
-		
-		
 		out.flush();
 		out.close();
 	}

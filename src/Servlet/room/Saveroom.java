@@ -13,12 +13,12 @@ import javax.servlet.http.HttpSession;
 
 import JavaBean.DBBean;
 
-public class Boardroombytime extends HttpServlet {
+public class Saveroom extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public Boardroombytime() {
+	public Saveroom() {
 		super();
 	}
 
@@ -43,7 +43,29 @@ public class Boardroombytime extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-	
+		response.setContentType("text/html");
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		
+		DBBean co = new DBBean();
+		String user_ID = new String (request.getParameter("userid").getBytes("ISO-8859-1"),"utf-8");
+		String room_id = new String (request.getParameter("room").getBytes("ISO-8859-1"),"utf-8");
+		String order_date = new String (request.getParameter("date").getBytes("ISO-8859-1"),"utf-8");
+		String order_time = new String (request.getParameter("ordertime").getBytes("ISO-8859-1"),"utf-8");
+		String reason = new String (request.getParameter("reason").getBytes("ISO-8859-1"),"utf-8");
+		String college = new String (request.getParameter("college").getBytes("ISO-8859-1"),"utf-8");
+		String sql = "insert into tb_order(b_id,user_id,order_date,order_time,reason,college,approved,state) "
+			+"values('"+room_id+"','"+user_ID+"','"+order_date+"',"+order_time+",'"+reason+"','"+college+"',0,1)";
+		try
+		{
+			co.update(sql);
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"预约成功！\");" + " window.location.href=\"./index.jsp\";</script> ");
+		} catch (Exception e)
+		{
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"预约失败！请重试！\");" + " window.location.href=\"./JSP/ROOM/boardroom.jsp\";</script> ");
+		}
+		out.flush();
+		out.close();
 	}
 
 	/**
@@ -59,43 +81,7 @@ public class Boardroombytime extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
-		
-//		response.sendRedirect("./JSP/ROOM/boardroombytime.jsp");
-		DBBean db = new DBBean();
-		String date = new String (request.getParameter("date").getBytes("ISO-8859-1"),"utf-8");
-		String time = new String (request.getParameter("time").getBytes("ISO-8859-1"),"utf-8");
-		String sql = "select * from tb_order where order_date='"+date+"' and order_time='"+time+"'";
-		
-		String sql1 = "select b_id from tb_boardroom where b_id not in(select b_id from tb_order where order_date='"+date+"' and order_time='"+time+"')";
-		
-		ResultSet rs1 = db.query(sql1);
-		
-        boolean b=true;
-        HttpSession session = request.getSession();
-        int i=1;
-        
-		try {
-			while(rs1.next())
-			{
-				request.setAttribute("room"+i,rs1.getString("b_id")); 
-				i++;
-			}
-			
-			request.setAttribute("date",date); 
-			request.setAttribute("time",time); 
-			request.setAttribute("length",i-1); 
-			request.getRequestDispatcher( "./JSP/ROOM/boardroombytime.jsp").forward(request,response); 
-		//	response.sendRedirect("./JSP/ROOM/boardroombytime.jsp");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		out.flush();
-		out.close();
+		doGet(request,response);
 	}
 
 	/**

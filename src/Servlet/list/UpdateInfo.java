@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import JavaBean.DBBean;
+
 public class UpdateInfo extends HttpServlet {
 
 	/**
@@ -39,16 +41,51 @@ public class UpdateInfo extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
+		
+		/*
+		
+		//接收数据表的键参数及表的标识
+		int key=Integer.parseInt(new String (request.getParameter("key").getBytes("ISO-8859-1"),"utf-8"));
+		int flag=Integer.parseInt(new String (request.getParameter("flag").getBytes("ISO-8859-1"),"utf-8"));
+		out.println(request.getParameter("key"));
+		out.print(request.getParameter("flag"));
+		//sql语句
+		String sql;
+
+		DBBean DB=new DBBean();
+		//执行更新
+		try{
+			//判断执行删除哪一个表格中的记录
+			switch (flag) {
+			case 0:
+				sql="delete from info_re_poj where ="+key;break;
+			case 1:
+				sql="delete from info_train where ="+key;break;
+			case 2:
+				sql="delete from info_article where ="+key;break;
+			case 3:
+				sql="delete from info_support where ="+key;break;
+			case 4:
+				sql="delete from info_groupBuild where ="+key;break;
+			case 5:
+				sql="delete from info_book where ="+key;break;
+			case 6:
+				sql="delete from info_ipr where ="+key;break;
+			case 7:
+				sql="delete from info_checkup where ="+key;break;
+			case 8:
+				sql="delete from info_meeting where ="+key;break;
+			case 9:
+				sql="delete from info_foreign where ="+key;break;
+			default:sql="";break;
+			}
+			DB.update(sql);
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"成功删除记录! \");" + " window.location.href=\"../../CMS/JSP/LIST/listroom.jsp \";</script> ");
+		} catch (Exception e){
+			response.getWriter().print("<script type=\"text/javascript\">" + "alert(\"删除失败，请重试！\");" + " window.location.href=\"../../CMS/JSP/LIST/listroom.jsp \";</script> ");
+		}*/
 		out.flush();
 		out.close();
 	}
@@ -65,20 +102,7 @@ public class UpdateInfo extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		doGet(request, response);
 	}
 
 	/**

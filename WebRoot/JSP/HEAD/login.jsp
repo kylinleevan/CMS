@@ -9,11 +9,21 @@
 		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
 		<script src="../../bootstrap/js/jquery.min.js"></script>
 		<script src="../../bootstrap/js/bootstrap.js"></script>
-		<style>body {	padding-top: 50px;}</style>
+		<style>
+body {
+	padding-top: 50px;
+}
+</style>
 		<title>登录</title>
 	</head>
 
 	<body>
+		<%
+			String s = (String) session.getAttribute("isLogined");
+			String t = "true";
+			if (t.equals(s))
+				response.sendRedirect("../../index.jsp");
+		%>
 		<script type="text/javascript">
 		function Confirm()
 		{
@@ -52,10 +62,17 @@
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a data-toggle="modal" data-target="#myModal"><p class="text-success">提示</p></a>
+								<a data-toggle="modal" data-target="#myModal"><p
+										class="text-success">
+										提示
+									</p>
+								</a>
 							</li>
 							<li>
-								<a href="register.jsp"><p class="text-success">注册</p></a>
+								<a href="register.jsp"><p class="text-success">
+										注册
+									</p>
+								</a>
 							</li>
 
 						</ul>

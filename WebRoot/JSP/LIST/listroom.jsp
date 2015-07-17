@@ -24,12 +24,8 @@
 				<ul class="nav nav-tabs">
 					<li role="presentation" class="active"><a href="listroom.jsp">我的预约</a>
 					</li>
-					<li role="presentation"><a href="listinfo.jsp">我的上传</a>
-					</li>
+					<li role="presentation"><a href="listinfo.jsp">我的上传</a></li>
 				</ul>
-
-
-
 
 				<%
 					int i = 0;
@@ -62,6 +58,18 @@
 						data-toggle="collapse" data-target='#<%=i%>'><%=mylist.getRoomId(i)%><br><%=mylist.getOrderDate(i)%></button>
 
 					<div id='<%=i%>' class="collapse">
+						<br>
+						<table class="table table-bordered">
+							<tr>
+								<th colspan=2><p class="text-center">
+										房间号：<%=mylist.getRoomId(i)%></p>
+								</th>
+							</tr>
+							<tr>
+								<td>预订人：<%=session.getAttribute("userName")%></td>
+								<td>预定日期：</td><%=mylist.getOrderDate(i)%></tr>
+						</table>
+
 						<b>房间号：</b>
 						<%=mylist.getRoomId(i)%>
 						<br> <b>预订人：</b>
@@ -78,7 +86,6 @@
 						<%=mylist.getSize(i)%><br> <b>备注：</b>
 						<%=mylist.getRemarks(i)%><br>
 
-
 						<form class="form-horizontal" action="cancel.jsp" Name="form"
 							method="post" onSubmit="return cheek()">
 							<input type="hidden" name="Room" value='<%=mylist.getRoomId(i)%>'>
@@ -90,7 +97,8 @@
 								value='<%=mylist.getOrderTime(i)%>'>
 							<button type="submit" class="btn btn-danger">取消预约</button>
 						</form>
-
+						<br> <a href='../ROOM/boardroom.jsp'><button
+								type='button' class='btn btn-warning'>继续预约</button> </a>
 					</div>
 					<br>
 					<%
@@ -101,23 +109,11 @@
 							out.println("<a href='../ROOM/boardroom.jsp'><button type='button' class='btn btn-primary'>立即预约</button></a>");
 						}
 					%>
-					<br> <a href='../ROOM/boardroom.jsp'><button type='button'
-							class='btn btn-warning'>继续预约</button></a>
 				</div>
-
-
-
-				</a>
-
-
 			</div>
 			<div class="col-md-1"></div>
 		</div>
-
 	</div>
-
-
-
 
 </body>
 </html>

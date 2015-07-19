@@ -75,13 +75,18 @@
 				<hr style="height:3px;border:none;border-top:3px double green;" />
 				<%
 					}
-							} else if (mylist.getFutureDays(i) != mylist
+						} else{
+							if(mylist.getFutureDays(i)<0){
+									request.setAttribute("color", "btn ");
+									approvedString = "<font color=gray><b>已过期</b></font>";			
+							}else if (mylist.getFutureDays(i) != mylist
 									.getFutureDays(i - 1)) {
 				%>
 				<font size=10 color="orange"><b><%=mylist.getFutureDays(i)%></b>
 				</font><font size=5><b>日内到期的预约卡</b> </font>
 				<hr style="height:3px;border:none;border-top:3px double green;" />
 				<%
+					}
 					}
 				%>
 				<br>

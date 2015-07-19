@@ -26,9 +26,12 @@ public class listroomBean {
 	private int []size;               //房间大小
 	private String []media;           //媒体情况
 	private String []address;         //地址
+	private int[]futureDays;          //会议开始前的天数
+	/****************************************************************************/
 	private int rsRowNumber;           //结果集中记录的数目
 	private DBBean DB=new DBBean(); //连接数据库
 	private ResultSet rs;           //结果集
+	private String sql;
 	
 	public void setOrderTime(int orderTime,int i){
 		this.orderTime[i] =orderTime;
@@ -120,18 +123,28 @@ public class listroomBean {
 	public void setCollege(String college,int i) {
 		this.college[i] = college;
 	}
+	
+	public int getFutureDays(int i) {
+		return futureDays[i];
+	}
+	public void setFutureDays(int futureDays,int i) {
+		this.futureDays[i] = futureDays;
+	}
+	/**********************************************************************/
 	public int getrsRowNumber() {
 		return rsRowNumber;
 	}
 	public void setrsRowNumber(int rsRowNumber) {
 		this.rsRowNumber = rsRowNumber;
 	}
+	/*********************************************************************/
+	/****************************************************************************/
 	//构造函数
 	public listroomBean(){
 
 	}//查询用户
 	public boolean init(String user){
-		String sql="select * from tb_order ,tb_boardroom,tb_time " +
+		sql="select * from tb_order ,tb_boardroom,tb_time " +
 				"where  tb_order.order_time=tb_time.t_id and " +
 				"tb_order.b_id=tb_boardroom.b_id and " +
 				"user_id='"+user+"' and  tb_order.state=1 order by order_date";
@@ -158,6 +171,7 @@ public class listroomBean {
 				size=new int[rsRowNumber];
 				media=new String[rsRowNumber];
 				address=new String[rsRowNumber];
+				futureDays=new int[rsRowNumber];
 			}
 			else {
 				return false;
@@ -171,8 +185,9 @@ public class listroomBean {
 		//找出 房间号，用户ID，预定日期，预定起止时间，**，预定状态，预定原因，所属学院，备注，地址，媒体情况，房间大小，
 		if(sign){
 			try {
+				rs=DB.query(sql);
 				int i=0;
-				do {
+				while(rs.next()){
 					setRoomId(rs.getString("tb_order.b_id"),i);    //保存房间号
 					setUserId(rs.getString("user_id"),i);          //保存用户名
 					setOrderDate(rs.getString("order_date"),i);    //保存预定日期
@@ -188,7 +203,16 @@ public class listroomBean {
 					setSize(rs.getInt("b_size"),i);                //保存房间大小
 					i++;
 
-				}while(rs.next());
+				};
+				for(i=0;i<rsRowNumber;i++){
+					sql="select to_days('"+getOrderDate(i)+"')-to_days(now()) commingdays";
+					rs=DB.query(sql);
+					rs.next();
+					setFutureDays(rs.getInt("commingdays"), i);   //保存天数
+					System.out.println(getFutureDays(i));
+					
+				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

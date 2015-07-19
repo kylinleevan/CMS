@@ -539,7 +539,6 @@
 						<h2><%=myBook.getBookNumber()%></h2>
 					</button>
 					<div id="book" class="collapse">
-
 						<table class="table table-hover">
 							<tr>
 								<th>#</th>

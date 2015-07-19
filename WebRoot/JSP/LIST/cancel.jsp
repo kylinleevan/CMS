@@ -30,12 +30,12 @@
 
 						<!-- 预定信息 -->
 						<input class="form-control" id="bId" type="text"
-							placeholder='房间号：<%=request.getParameter("Room")%>' disabled><br>
+							placeholder='房间号：<%=request.getParameter("Room")%>' readonly><br>
 						<input class="form-control" id="Date" type="text"
-							placeholder='预定日期：<%=request.getParameter("Date")%>' disabled><br>
+							placeholder='预定日期：<%=request.getParameter("Date")%>' readonly><br>
 						<input class="form-control" id="time" type="text"
 							placeholder='预定时段：<%=request.getParameter("sTime")%>---<%=request.getParameter("eTime")%>'
-							disabled> <br>
+							readonly> <br>
 						<textarea class="form-control" rows="5" id="reasonId"
 							required="required" name="reason" placeholder="请简述原因..."></textarea>
 						<br />

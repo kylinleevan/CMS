@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50623
 File Encoding         : 65001
 
-Date: 2015-07-12 10:16:15
+Date: 2015-07-19 15:36:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,13 +56,14 @@ CREATE TABLE `info_article_awards` (
 -- ----------------------------
 DROP TABLE IF EXISTS `info_book`;
 CREATE TABLE `info_book` (
+  `b_id` int(11) NOT NULL AUTO_INCREMENT,
   `book_id` varchar(30) NOT NULL DEFAULT '',
   `book_name` varchar(50) NOT NULL,
   `p_date` date NOT NULL,
   `p_dep` varchar(200) NOT NULL,
   `publisher` varchar(20) NOT NULL,
   `pub_date` date NOT NULL,
-  PRIMARY KEY (`book_id`)
+  PRIMARY KEY (`b_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出版教材，[book_id]是条码号';
 
 -- ----------------------------
@@ -97,11 +98,13 @@ CREATE TABLE `info_checkup` (
   `publisher` varchar(20) NOT NULL,
   `pub_date` date NOT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='成果验收鉴定';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='成果验收鉴定';
 
 -- ----------------------------
 -- Records of info_checkup
 -- ----------------------------
+INSERT INTO `info_checkup` VALUES ('17', '1', '0001-01-01', '1', '1', '1', '10000', '2013-01-01');
+INSERT INTO `info_checkup` VALUES ('18', '22', '2013-02-05', '5545', '4545', '54', '10000', '2013-01-01');
 
 -- ----------------------------
 -- Table structure for `info_foreign`
@@ -274,7 +277,10 @@ CREATE TABLE `tb_boardroom` (
 -- ----------------------------
 -- Records of tb_boardroom
 -- ----------------------------
+INSERT INTO `tb_boardroom` VALUES ('1017', '60', '0', '机房', '院办1017');
 INSERT INTO `tb_boardroom` VALUES ('2001', '20', '1', '没有网络', '院办2001');
+INSERT INTO `tb_boardroom` VALUES ('2002', '100', '0', '有网络', '院办2002');
+INSERT INTO `tb_boardroom` VALUES ('3001', '50', '0', '学生不可用', '院办3001');
 INSERT INTO `tb_boardroom` VALUES ('4001', '150', '1', '没有网络', '院办4001');
 
 -- ----------------------------
@@ -297,8 +303,12 @@ CREATE TABLE `tb_order` (
 -- ----------------------------
 -- Records of tb_order
 -- ----------------------------
+INSERT INTO `tb_order` VALUES ('1017', '10000', '2015-07-22', '2', '啊啊啊', '草泥马', '0', '0', null);
 INSERT INTO `tb_order` VALUES ('2001', '10000', '2015-07-12', '1', '呵呵', '计算机', '1', '1', null);
 INSERT INTO `tb_order` VALUES ('2001', '10000', '2015-07-12', '2', '哈哈', '计算机', '1', '1', null);
+INSERT INTO `tb_order` VALUES ('2001', '10000', '2015-07-14', '1', '11', '1', '1', '1', null);
+INSERT INTO `tb_order` VALUES ('2001', '10000', '2015-07-15', '1', '2', '2', '1', '1', null);
+INSERT INTO `tb_order` VALUES ('3001', '10000', '2015-07-17', '1', '发射点', '发大水', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for `tb_time`
